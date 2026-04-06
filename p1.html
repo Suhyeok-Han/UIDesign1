@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P1 — Suhyeok Han</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #page { padding-bottom: 80px; max-width: 1000px; }
+
+    .work-tag {
+      font-size: 0.55rem; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .work-title {
+      font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 300;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 56px; line-height: 1.05;
+    }
+
+    .work-image {
+      width: 100%; margin-bottom: 48px;
+      background: #f0efec; border: 1px solid var(--border);
+    }
+    .work-image img { width: 100%; display: block; }
+    .work-image .img-ph {
+      aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-ph span { font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:#bbb; }
+
+    .work-meta {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 0; margin-bottom: 48px;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+    .meta-cell {
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-label {
+      font-size: 0.5rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+    }
+    .meta-val {
+      font-size: 0.65rem; letter-spacing: 0.06em;
+      color: var(--muted); font-weight: 300; line-height: 1.6;
+    }
+
+    .work-desc {
+      font-size: 0.75rem; font-weight: 300;
+      letter-spacing: 0.04em; line-height: 1.9;
+      color: var(--fg); max-width: 640px;
+    }
+    .work-desc p + p { margin-top: 1.4em; }
+  </style>
+</head>
+<body>
+
+<header id="site-header">
+  <h1>Suhyeok Han</h1>
+  <nav>
+    <a href="ui-programming-design.html" class="active">UI Programming Design</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="about.html">About Me</a>
+  </nav>
+</header>
+
+<div id="page">
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="sep">—</span>
+    <a href="ui-programming-design.html">UI Programming Design</a>
+    <span class="sep">—</span>
+    <span class="current">Project 1</span>
+  </div>
+
+  <p class="work-tag">Project 01</p>
+  <h2 class="work-title">Project One</h2>
+
+  <div class="work-image">
+    <!-- Replace with: <img src="your-image.jpg" alt="Project 1"> -->
+    <div class="img-ph"><span>project image</span></div>
+  </div>
+
+  <div class="work-meta">
+    <div class="meta-cell">
+      <p class="meta-label">Tools</p>
+      <p class="meta-val">HTML / CSS / JavaScript</p>
+    </div>
+    <div class="meta-cell">
+      <p class="meta-label">Date</p>
+      <p class="meta-val">2024</p>
+    </div>
+    <div class="meta-cell">
+      <p class="meta-label">Type</p>
+      <p class="meta-val">UI Programming Design</p>
+    </div>
+  </div>
+
+  <div class="work-desc">
+    <p>Write your project description here. Describe what the project is about, what you built, and what you learned.</p>
+    <p>You can add multiple paragraphs to explain the process, challenges, and outcomes of the project.</p>
+  </div>
+
+</div>
+
+<!-- Bottom navigation -->
+<nav class="page-nav">
+  <a class="page-nav-item current" href="p1.html">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 17.5h7M17.5 14v7"/></svg>
+    P1
+  </a>
+  <a class="page-nav-item" href="p2.html">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+    P2
+  </a>
+  <a class="page-nav-item" href="p3.html">
+    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    P3
+  </a>
+  <a class="page-nav-item" href="ex1.html">
+    <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+    Ex1
+  </a>
+  <a class="page-nav-item" href="ex2.html">
+    <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    Ex2
+  </a>
+  <a class="page-nav-item" href="ex3.html">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+    Ex3
+  </a>
+</nav>
+
+<script src="main.js"></script>
+</body>
+</html>

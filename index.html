@@ -1,87 +1,221 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Suhyeok Han | UI Design Programming 1</title>
-
-  <!-- CSS 연결 -->
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Suhyeok Han</title>
   <link rel="stylesheet" href="style.css">
-</head>
+  <style>
+    /* ── INTRO ── */
+    #intro {
+      position: fixed; inset: 0; z-index: 300;
+      background: #fff;
+      overflow: hidden;
+    }
+    #intro-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    /* white tile mask on top */
+    #mosaic-canvas {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    #intro-hint {
+      position: absolute; bottom: 40px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.55rem; letter-spacing: 0.28em;
+      text-transform: uppercase; color: rgba(10,10,10,0.4);
+      white-space: nowrap;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:.3} 50%{opacity:.9} }
+    #intro.done { opacity: 0; transition: opacity 0.6s ease; pointer-events: none; }
 
+    /* ── MAIN ── */
+    #main {
+      padding-top: calc(var(--nav-h) + 0px);
+      opacity: 0; transition: opacity 0.6s ease 0.1s;
+    }
+    #main.visible { opacity: 1; }
+
+    /* ── FULL IMAGE HERO ── */
+    .hero {
+      width: 100%; position: relative;
+      margin-bottom: 2px;
+    }
+    .hero img, .hero .img-ph {
+      width: 100%; display: block;
+    }
+    .hero-item {
+      position: relative; overflow: hidden;
+    }
+    .hero-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
+    }
+    .hero-item:hover img { transform: scale(1.02); }
+
+    /* Two-column hero like AD */
+    .hero-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 2px;
+    }
+    .hero-duo .hero-item { aspect-ratio: 3/4; }
+
+    /* Single full-width */
+    .hero-single .hero-item { aspect-ratio: 16/7; }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 32px; left: 32px;
+    }
+    .hero-caption h2 {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .hero-caption a {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .hero-caption a:hover { border-color: #fff; }
+
+    /* Image placeholder */
+    .img-ph {
+      background: #f0efec;
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%;
+    }
+    .img-ph span {
+      font-size: 0.5rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: #bbb;
+    }
+
+    /* ── GRID (below hero) ── */
+    .home-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 2px;
+    }
+    .home-grid .grid-item {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4;
+    }
+    .home-grid .grid-item img,
+    .home-grid .grid-item .img-ph {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
+    }
+    .home-grid .grid-item:hover img { transform: scale(1.03); }
+
+    @media (max-width: 600px) {
+      .hero-duo { grid-template-columns: 1fr; }
+      .home-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
 <body>
 
-<!-- INTRO -->
-<section class="intro" id="intro">
-  <div class="intro-inner">
-    <p class="intro-line">Suhyeok Han</p>
-    <p class="intro-line">Visual / Spatial / Interface</p>
-    <p class="intro-line subtle">Click to enter</p>
-  </div>
-</section>
+<!-- Header -->
+<header id="site-header">
+  <h1>Suhyeok Han</h1>
+  <nav>
+    <a href="ui-programming-design.html">UI Programming Design</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="about.html">About Me</a>
+  </nav>
+</header>
 
-<!-- MAIN -->
-<main class="main hidden" id="main">
+<!-- Intro mosaic overlay -->
+<div id="intro">
+  <img id="intro-img"
+    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=85"
+    alt="" crossorigin="anonymous"/>
+  <canvas id="mosaic-canvas"></canvas>
+  <p id="intro-hint">hover to reveal &nbsp;·&nbsp; click to enter</p>
+</div>
 
-  <section class="section">
-    <div class="container">
+<!-- Main content -->
+<main id="main">
 
-      <div class="project" data-image="img/project1.jpg">
-        <h2 class="project-title">Project 01</h2>
-        <p class="project-meta">ASCII TOWN</p>
-      </div>
-
-      <div class="project" data-image="img/project2.jpg">
-        <h2 class="project-title">Project 02</h2>
-        <p class="project-meta">INTERACTIVE POSTER</p>
-      </div>
-
+  <!-- Two-up hero -->
+  <div class="hero-duo">
+    <div class="hero-item">
+      <div class="img-ph" style="aspect-ratio:3/4"><span>image 01</span></div>
     </div>
-  </section>
+    <div class="hero-item">
+      <div class="img-ph" style="aspect-ratio:3/4"><span>image 02</span></div>
+    </div>
+  </div>
+
+  <!-- Full-width -->
+  <div class="hero-single" style="margin-bottom:2px;">
+    <div class="hero-item">
+      <div class="img-ph" style="aspect-ratio:16/7"><span>image 03</span></div>
+    </div>
+  </div>
+
+  <!-- Three-col grid -->
+  <div class="home-grid">
+    <div class="grid-item"><div class="img-ph"><span>image 04</span></div></div>
+    <div class="grid-item"><div class="img-ph"><span>image 05</span></div></div>
+    <div class="grid-item"><div class="img-ph"><span>image 06</span></div></div>
+  </div>
 
 </main>
 
-<!-- 커서 이미지 -->
-<img id="cursor-image" src="" alt="">
+<script src="main.js"></script>
+<script>
+  const intro = document.getElementById('intro');
+  const introImg = document.getElementById('intro-img');
+  const canvas = document.getElementById('mosaic-canvas');
+  const ctx = canvas.getContext('2d');
+  const TILE = 28;
+  const revealed = new Set();
+  let totalTiles = 0, ready = false;
 
-<!-- JS 연결 -->
-<script src="script.js"></script>
+  function resize() {
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight; drawMask();
+  }
+  function drawMask() {
+    const cols = Math.ceil(canvas.width/TILE), rows = Math.ceil(canvas.height/TILE);
+    totalTiles = cols * rows;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#ffffff';
+    for (let r=0;r<rows;r++) for (let c=0;c<cols;c++)
+      if (!revealed.has(`${c},${r}`)) ctx.fillRect(c*TILE, r*TILE, TILE, TILE);
+  }
+  introImg.addEventListener('load', () => { ready=true; resize(); });
+  if (introImg.complete) { ready=true; resize(); }
+  window.addEventListener('resize', resize);
 
+  intro.addEventListener('mousemove', e => {
+    if (!ready) return;
+    const col=Math.floor(e.clientX/TILE), row=Math.floor(e.clientY/TILE);
+    for (let dr=-2;dr<=2;dr++) for (let dc=-2;dc<=2;dc++) {
+      const key=`${col+dc},${row+dr}`;
+      if (!revealed.has(key)) { revealed.add(key); ctx.clearRect((col+dc)*TILE,(row+dr)*TILE,TILE,TILE); }
+    }
+    if (revealed.size > totalTiles*0.32) enterSite();
+  });
+  intro.addEventListener('click', enterSite);
+
+  function enterSite() {
+    if (intro.classList.contains('done')) return;
+    intro.classList.add('done');
+    setTimeout(() => { intro.style.display='none'; document.getElementById('main').classList.add('visible'); }, 600);
+  }
+</script>
 </body>
 </html>
-
-<!--<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Suhyeok Han | UI Design Programming 1</title>
-  <meta charset="utf-8" />
-</head>
-
-<body>
--->
-  <!-- this is where my code is-->
-<!--  <div id="grid">
-    <div id="left-column" class="scroll">  
-
--->
-      <!-- about me-->
-<!--      <h1>[Suhyeok Han]</h1>  
-      <p class="desc">A short paragraph about me...</p>
-      <ul>
-        <li>My favorite food is hamburger</li>
-        <img src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202302_0005-999_BigMac_1564x1564-1?wid=1564&hei=1564&dpr=off" width="300" alt="Big Mag" />
-        <li>My favorite song is Virtual Insanity by Jamiroquai</li>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/4JkIs37a2JE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <li>My favorite website is <a href="https://namesak3.com">Namesake</a></li>
-        <li>My favorite pokemon</li>
-        <img src="https://archives.bulbagarden.net/media/upload/8/8c/Spr_3e_258.png" width="300" alt="ミズゴロウ" />
-      </ul>
-      <h3>Exercises</h3>
-      <ul>
-        <li><a href="ASCII_Town/exterior-SuhyeokHan.html">ASCII Town</a></li>
-      </ul>
-    </div>
-  </div>
-</body>
-</html>
--->
