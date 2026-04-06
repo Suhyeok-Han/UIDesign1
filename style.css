@@ -301,3 +301,12 @@ nav a.active::after { transform: scaleX(1); }
   .card-grid { grid-template-columns: 1fr; }
   nav { gap: 14px; }
 }
+
+#site-header h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+#site-header h1 a:hover {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
