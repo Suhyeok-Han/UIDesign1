@@ -6,137 +6,303 @@
   <title>About Me — Suhyeok Han</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    #page { max-width: 960px; }
+    #page { max-width: 1100px; }
 
-    /* ── ITEMS ── */
-    .about-list {
-      border-top: 1px solid var(--border);
-    }
-
-    .about-row {
+    /* ══════════════════════════════
+       TOP SECTION — Photo + Info
+    ══════════════════════════════ */
+    .about-top {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid var(--border);
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-bottom: 80px;
     }
 
-    .about-text {
-      padding: 56px 48px 56px 0;
+    /* ── LEFT: Single photo ── */
+    .photo-grid {
+      overflow: hidden;
+      background: #f0efec;
       border-right: 1px solid var(--border);
+      min-height: 420px;
+    }
+    .photo-grid img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.5s cubic-bezier(.25,.46,.45,.94);
+    }
+    .photo-grid:hover img { transform: scale(1.02); }
+    .photo-grid .img-ph {
+      width: 100%; height: 100%; min-height: 420px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-grid .img-ph span {
+      font-size: 0.48rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: #bbb;
     }
 
-    .about-num {
-      font-size: 0.52rem;
-      letter-spacing: 0.24em;
+    /* ── RIGHT: Info ── */
+    .about-info {
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .info-name {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      display: block;
+      line-height: 1.05;
+      margin-bottom: 8px;
     }
 
-    .about-category {
-      font-size: 0.55rem;
+    .info-subname {
+      font-size: 0.6rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 16px;
+      margin-bottom: 40px;
     }
 
-    .about-title {
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
+    .info-block {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+    }
+    .info-block:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-block-label {
+      font-size: 0.5rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      line-height: 1.2;
+      color: var(--accent);
+      margin-bottom: 14px;
     }
 
-    .about-body {
-      font-size: 0.68rem;
+    .info-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+      align-items: baseline;
+    }
+    .info-row:last-child { margin-bottom: 0; }
+
+    .info-year {
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      font-weight: 300;
+      min-width: 48px;
+      flex-shrink: 0;
+    }
+
+    .info-detail {
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      font-weight: 300;
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    .info-detail .sub {
+      display: block;
+      font-size: 0.58rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ══════════════════════════════
+       PERSONAL TASTE — Accordion
+    ══════════════════════════════ */
+    .taste-section {
+      margin-bottom: 80px;
+    }
+
+    .taste-heading {
+      font-size: 0.55rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .taste-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .taste-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font);
+      text-align: left;
+      gap: 16px;
+      transition: background 0.15s;
+    }
+    .taste-trigger:hover .taste-trigger-label { color: var(--fg); }
+
+    .taste-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .taste-num {
+      font-size: 0.48rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      min-width: 24px;
+    }
+
+    .taste-category {
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 100px;
+    }
+
+    .taste-trigger-label {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      transition: color 0.2s;
+    }
+
+    .taste-icon {
+      width: 16px; height: 16px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .taste-icon::before,
+    .taste-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--muted);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .taste-icon::before { /* horizontal */
+      width: 14px; height: 1px;
+      top: 50%; left: 1px;
+      transform: translateY(-50%);
+    }
+    .taste-icon::after { /* vertical */
+      width: 1px; height: 14px;
+      left: 50%; top: 1px;
+      transform: translateX(-50%);
+    }
+    .taste-item.open .taste-icon::after {
+      transform: translateX(-50%) rotate(90deg);
+      opacity: 0;
+    }
+
+    /* Accordion body */
+    .taste-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+    .taste-item.open .taste-body {
+      grid-template-rows: 1fr;
+    }
+    .taste-body-inner {
+      overflow: hidden;
+    }
+
+    .taste-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 8px 0 40px 48px;
+      align-items: center;
+    }
+
+    .taste-text {
+      font-size: 0.65rem;
       font-weight: 300;
       letter-spacing: 0.04em;
       color: var(--muted);
       line-height: 1.85;
     }
-
-    .about-body a {
+    .taste-text a {
       color: var(--fg);
       border-bottom: 1px solid var(--border);
       padding-bottom: 1px;
       transition: border-color 0.2s;
     }
-    .about-body a:hover { border-color: var(--fg); }
+    .taste-text a:hover { border-color: var(--fg); }
 
-    .about-media {
-      padding: 40px 0 40px 48px;
+    .taste-media {
       display: flex;
       align-items: center;
       justify-content: center;
     }
-
-    .about-media img {
+    .taste-media img {
       max-width: 100%;
-      max-height: 360px;
+      max-height: 240px;
       object-fit: contain;
       display: block;
     }
-
-    .about-media .yt-wrap {
-      width: 100%;
-      aspect-ratio: 16/9;
+    .taste-media .yt-wrap {
+      width: 100%; aspect-ratio: 16/9;
     }
-    .about-media .yt-wrap iframe {
+    .taste-media .yt-wrap iframe {
       width: 100%; height: 100%; border: none; display: block;
     }
-
-    .about-media .pokemon-wrap {
+    .taste-media .pokemon-wrap {
       background: #f5f5f3;
-      width: 100%;
-      aspect-ratio: 1/1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 240px;
+      width: 180px; height: 180px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .about-media .pokemon-wrap img {
-      width: 110px;
+    .taste-media .pokemon-wrap img {
+      width: 90px;
       image-rendering: pixelated;
-      filter: none;
     }
-
-    .site-link-box {
-      width: 100%;
-      aspect-ratio: 4/3;
+    .taste-media .site-box {
+      width: 100%; aspect-ratio: 3/2;
       background: #f5f5f3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
       border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
       transition: background 0.2s;
     }
-    .site-link-box:hover { background: #ebebea; }
-    .site-link-box span {
-      font-size: 0.52rem; letter-spacing: 0.2em;
+    .taste-media .site-box:hover { background: #ebebea; }
+    .taste-media .site-box span {
+      font-size: 0.52rem; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--muted);
     }
-    .site-link-box .url {
-      font-size: 0.65rem; letter-spacing: 0.1em;
+    .taste-media .site-box .url {
+      font-size: 0.62rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--fg);
       border-bottom: 1px solid var(--border); padding-bottom: 2px;
     }
 
-    @media (max-width: 640px) {
-      .about-row { grid-template-columns: 1fr; }
-      .about-text { border-right: none; padding: 40px 0; }
-      .about-media { padding: 0 0 40px; }
+    @media (max-width: 768px) {
+      .about-top { grid-template-columns: 1fr; }
+      .photo-grid { border-right: none; border-bottom: 1px solid var(--border); }
+      .taste-content { grid-template-columns: 1fr; padding-left: 0; }
+      .taste-trigger-left { gap: 14px; }
+      .taste-category { display: none; }
     }
   </style>
 </head>
 <body>
 
 <header id="site-header">
-  <h1>Suhyeok Han</h1>
+  <h1><a href="index.html">Suhyeok Han</a></h1>
   <nav>
     <a href="ui-programming-design.html">UI Programming Design</a>
     <a href="portfolio.html">Portfolio</a>
@@ -149,82 +315,179 @@
   <p class="page-eyebrow">Who I am</p>
   <h2 class="page-title">About Me</h2>
 
-  <div class="about-list">
+  <!-- ── TOP: Photo grid + Info ── -->
+  <div class="about-top">
 
-    <!-- 01 Food -->
-    <div class="about-row">
-      <div class="about-text">
-        <span class="about-num">01</span>
-        <p class="about-category">Favorite Food</p>
-        <h3 class="about-title">Hamburger</h3>
-        <p class="about-body">Nothing beats a good burger. Simple, satisfying, and always hits the spot — the Big Mac holds a special place.</p>
-      </div>
-      <div class="about-media">
-        <img
-          src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202302_0005-999_BigMac_1564x1564-1?wid=1564&hei=1564&dpr=off"
-          alt="Big Mac"
-        />
-      </div>
+    <!-- LEFT: Single photo -->
+    <div class="photo-grid">
+]<img src="images/Profile.JPG" alt="Suhyeok Han">
     </div>
 
-    <!-- 02 Song -->
-    <div class="about-row">
-      <div class="about-text">
-        <span class="about-num">02</span>
-        <p class="about-category">Favorite Song</p>
-        <h3 class="about-title">Virtual Insanity<br>— Jamiroquai</h3>
-        <p class="about-body">Timeless groove, iconic music video, and a bassline that never gets old.</p>
+    <!-- RIGHT: Info -->
+    <div class="about-info">
+      <h2 class="info-name">Suhyeok<br>Han</h2>
+      <p class="info-subname">한수혁</p>
+
+      <div class="info-block">
+        <p class="info-block-label">Education</p>
+        <div class="info-row">
+          <span class="info-year">2020—</span>
+          <span class="info-detail">
+            Seoul Nat'l Univ.
+            <span class="sub">Fashion / Visual Design</span>
+          </span>
+        </div>
       </div>
-      <div class="about-media">
-        <div class="yt-wrap">
-          <iframe
-            src="https://www.youtube.com/embed/4JkIs37a2JE"
-            title="Virtual Insanity — Jamiroquai"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
+
+      <div class="info-block">
+        <p class="info-block-label">Experience</p>
+        <div class="info-row">
+          <span class="info-year">2025</span>
+          <span class="info-detail">
+            Assistant Designer
+            <span class="sub">V</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <p class="info-block-label">Contact</p>
+        <div class="info-row">
+          <span class="info-year">Email</span>
+          <span class="info-detail">gkstn52@snu.ac.kr</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PERSONAL TASTE: Accordion ── -->
+  <div class="taste-section">
+    <p class="taste-heading">Personal Taste</p>
+
+    <!-- Item 01 — Food -->
+    <div class="taste-item">
+      <button class="taste-trigger" onclick="toggleTaste(this)">
+        <div class="taste-trigger-left">
+          <span class="taste-num">01</span>
+          <span class="taste-category">Food</span>
+          <span class="taste-trigger-label">Hamburger</span>
+        </div>
+        <span class="taste-icon"></span>
+      </button>
+      <div class="taste-body">
+        <div class="taste-body-inner">
+          <div class="taste-content">
+            <p class="taste-text">Nothing beats a good burger. Simple, satisfying, and always hits the spot — the Big Mac holds a special place.</p>
+            <div class="taste-media">
+              <img
+                src="https://s7d1.scene7.com/is/image/mcdonalds/DC_202302_0005-999_BigMac_1564x1564-1?wid=1564&hei=1564&dpr=off"
+                alt="Big Mac"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 03 Website -->
-    <div class="about-row">
-      <div class="about-text">
-        <span class="about-num">03</span>
-        <p class="about-category">Favorite Website</p>
-        <h3 class="about-title">Namesake</h3>
-        <p class="about-body">A site worth visiting — <a href="https://namesak3.com" target="_blank" rel="noopener">namesak3.com</a></p>
-      </div>
-      <div class="about-media">
-        <a class="site-link-box" href="https://namesak3.com" target="_blank" rel="noopener">
-          <span>Visit</span>
-          <span class="url">namesak3.com →</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- 04 Pokémon -->
-    <div class="about-row">
-      <div class="about-text">
-        <span class="about-num">04</span>
-        <p class="about-category">Favorite Pokémon</p>
-        <h3 class="about-title">Mudkip<br><span style="font-size:0.7em;color:var(--muted);letter-spacing:0.08em;">ミズゴロウ</span></h3>
-        <p class="about-body">The water-type starter from Hoenn. Hard not to love.</p>
-      </div>
-      <div class="about-media">
-        <div class="pokemon-wrap">
-          <img
-            src="https://archives.bulbagarden.net/media/upload/8/8c/Spr_3e_258.png"
-            alt="ミズゴロウ / Mudkip"
-          />
+    <!-- Item 02 — Music -->
+    <div class="taste-item">
+      <button class="taste-trigger" onclick="toggleTaste(this)">
+        <div class="taste-trigger-left">
+          <span class="taste-num">02</span>
+          <span class="taste-category">Music</span>
+          <span class="taste-trigger-label">Virtual Insanity — Jamiroquai</span>
+        </div>
+        <span class="taste-icon"></span>
+      </button>
+      <div class="taste-body">
+        <div class="taste-body-inner">
+          <div class="taste-content">
+            <p class="taste-text">Timeless groove, iconic music video, and a bassline that never gets old.</p>
+            <div class="taste-media">
+              <div class="yt-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/4JkIs37a2JE"
+                  title="Virtual Insanity"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-  </div><!-- /.about-list -->
+    <!-- Item 03 — Website -->
+    <div class="taste-item">
+      <button class="taste-trigger" onclick="toggleTaste(this)">
+        <div class="taste-trigger-left">
+          <span class="taste-num">03</span>
+          <span class="taste-category">Website</span>
+          <span class="taste-trigger-label">Namesake</span>
+        </div>
+        <span class="taste-icon"></span>
+      </button>
+      <div class="taste-body">
+        <div class="taste-body-inner">
+          <div class="taste-content">
+            <p class="taste-text">A site worth visiting — <a href="https://namesak3.com" target="_blank" rel="noopener">namesak3.com</a></p>
+            <div class="taste-media">
+              <a class="site-box" href="https://namesak3.com" target="_blank" rel="noopener">
+                <span>Visit</span>
+                <span class="url">namesak3.com →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 04 — Pokémon -->
+    <div class="taste-item">
+      <button class="taste-trigger" onclick="toggleTaste(this)">
+        <div class="taste-trigger-left">
+          <span class="taste-num">04</span>
+          <span class="taste-category">Pokémon</span>
+          <span class="taste-trigger-label">Mudkip / ミズゴロウ</span>
+        </div>
+        <span class="taste-icon"></span>
+      </button>
+      <div class="taste-body">
+        <div class="taste-body-inner">
+          <div class="taste-content">
+            <p class="taste-text">The water-type starter from Hoenn. Hard not to love.</p>
+            <div class="taste-media">
+              <div class="pokemon-wrap">
+                <img
+                  src="https://archives.bulbagarden.net/media/upload/8/8c/Spr_3e_258.png"
+                  alt="ミズゴロウ"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.taste-section -->
 
 </div>
 
 <script src="main.js"></script>
+<script>
+  function toggleTaste(btn) {
+    const item = btn.closest('.taste-item');
+    const isOpen = item.classList.contains('open');
+
+    // 다른 열린 항목 닫기 (선택사항 — 하나만 열리게 하려면 유지, 여러 개 동시에 열리게 하려면 아래 3줄 삭제)
+    document.querySelectorAll('.taste-item.open').forEach(el => {
+      if (el !== item) el.classList.remove('open');
+    });
+
+    item.classList.toggle('open', !isOpen);
+  }
+</script>
 </body>
 </html>
